@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Threading.Tasks;
+using lib;
 
 namespace app
 {
-    class Program
+  class Program
+  {
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
+      Task<String> secretTask = new KeyVaultConfigurationManager().GetSecretFromVaultMSI("c-test-keyvault", "c-test-secret-2");
+      secretTask.Wait();
+
+      System.Console.WriteLine(secretTask.Result);
     }
+  }
 }
